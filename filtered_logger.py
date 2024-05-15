@@ -22,6 +22,7 @@ def filter_datum(fields: List[str], redaction: str,
                          f"{m}={redaction}{separator}", message)
     return message
 
+
 def get_logger() -> logging.Logger:
     """
     Returns a Logger object for handling Personal Data"""
@@ -32,8 +33,8 @@ def get_logger() -> logging.Logger:
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(RedactingFormatter(list(PII_FIELDS)))
     logger.addHandler(stream_handler)
-
     return logger
+
 
 def get_db() -> mysql.connector.MySQLConnection:
     """A function that return MYSQLConnection object for
