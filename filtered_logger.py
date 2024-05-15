@@ -35,7 +35,7 @@ def get_logger() -> logging.Logger:
 
     return logger
 
-def get_db() -> mysql.connector.connection.MYSQLConnection:
+def get_db() -> mysql.connector.MySQLConnection:
     """A function that return MYSQLConnection object for
     accessing Personal Database"""
     username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
@@ -43,16 +43,14 @@ def get_db() -> mysql.connector.connection.MYSQLConnection:
     host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = environ.get("PERSONAL_DATA_DB_NAME")
 
-    con = mysql.connector.connection.MYSQLConnection(user=username,
-                                                         password=password,
-                                                         host=host,
-                                                         database=db_name)
+    con = mysql.connector.connect(user=username, password=password,
+                                  host=host, database=db_name)
     return con
 
 
 def main():
     """ main function"""
-    db = get_db
+    db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users;")
     field_names = [n[0] for n in cursor.description]
