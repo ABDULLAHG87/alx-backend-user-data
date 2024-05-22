@@ -12,7 +12,7 @@ def unathorized() -> str:
 
 
 @app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
-@def forbidden() -> str:
+def forbidden() -> str:
     """method for forbidden"""
     abort(403, description='Forbidden')
 
