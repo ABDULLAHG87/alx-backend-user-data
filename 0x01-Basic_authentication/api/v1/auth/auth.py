@@ -5,7 +5,7 @@ Module for Authentication in Flask
 
 
 from flask import request
-from typing import List, Typevar
+from typing import List, TypeVar
 
 
 class Auth:
@@ -44,6 +44,6 @@ class Auth:
 
         return header
 
-    def current_user(self, request=None) -> Typevar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):
         """Method for current user"""
         return None
