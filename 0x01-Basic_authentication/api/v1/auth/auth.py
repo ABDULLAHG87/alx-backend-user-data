@@ -24,7 +24,7 @@ class Auth:
 
         for excluded_path in excluded_paths:
             if excluded_path.startswith(path):
-                return false
+                return False
             elif path.startswith(excluded_path):
                 return False
             elif excluded_path[-1] == '*':
