@@ -10,6 +10,12 @@ class SessionAuth(Auth):
     """Class definition for Session Authentication"""
     user_id_by_session_id = {}
 
+    def session_cookie(self, request):
+        """Retrieve Session Cookies from a request"""
+        if request is None:
+            return None
+        return request.cookies.get('session_id')
+
     def create_session(self, user_id: str = None) -> str:
         """Method for creating session"""
         if user_id is None or not isinstance(user_id, str):
@@ -28,7 +34,7 @@ class SessionAuth(Auth):
     def current_user(self, request=None):
         """Method for tracking current user"""
         session_cookie = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session.cookie)
+        user_id = self.user_id_for_session_id(session_cookie)
         user = User.get(user_id)
         return user
 
