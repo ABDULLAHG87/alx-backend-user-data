@@ -14,10 +14,12 @@ def _hash_password(password: str) -> str:
     """Function to hash password in authentication"""
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
+
 def _generate_uuid():
     """Function for generating uuid"""
     id = uuid4()
     return str(id)
+
 
 class Auth:
     """Definition of Authorization Class"""
