@@ -31,7 +31,7 @@ class Auth:
     def register_user(self, email: str, password: str) -> Union[None, User]:
         """Method for regsitering User"""
         try:
-            user = self._db.find_user_by(email=email)
+            self._db.find_user_by(email=email)
         except NoResultFound:
             return self._db.add_user(email, _hash_password(password))
         else:
