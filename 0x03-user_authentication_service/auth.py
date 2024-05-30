@@ -5,6 +5,7 @@ from db import DB
 from user import User
 import bcrypt
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 from uuid import uuid4
 
 from typing import Union
@@ -15,7 +16,7 @@ def _hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
-def _generate_uuid():
+def _generate_uuid() -> str:
     """Function for generating uuid"""
     id = uuid4()
     return str(id)
@@ -55,7 +56,7 @@ class Auth:
             user.session_id = _generate_uuid()
             return user.session_id
 
-    def get_user_from_session_id(self, user_id: str) -> User:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """Method for get user from session id"""
         if session_id is None:
             return None
